@@ -61,5 +61,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.5.5")
     //Glide
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    //Material Components
+    implementation ("com.google.android.material:material:1.9.0")
 
 }

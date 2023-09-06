@@ -2,10 +2,11 @@ package com.ivo.rickandmortyapp.domain
 
 import com.ivo.rickandmortyapp.data.CharactersRepository
 import com.ivo.rickandmortyapp.data.models.ResponseModel
+import com.ivo.rickandmortyapp.data.models.ResultsModel
 
-class GetCharacters {
+class GetCharacter {
 
     private val repository = CharactersRepository()
 
-    suspend fun characters():ResponseModel = repository.getAllCharacters()
+    suspend fun character(url: String): ResultsModel = repository.getCharacter(url)
 }

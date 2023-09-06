@@ -1,13 +1,12 @@
-package com.ivo.rickandmortyapp.ui.view
+package com.ivo.rickandmortyapp.ui.view.charactersList
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.ivo.rickandmortyapp.databinding.ActivityMainBinding
-import com.ivo.rickandmortyapp.ui.view.adapter.CharacterAdapter
+import com.ivo.rickandmortyapp.ui.view.charactersList.adapter.CharacterAdapter
 import com.ivo.rickandmortyapp.ui.viewmodel.CharacterViewModel
 
 class MainActivity : AppCompatActivity() {
@@ -20,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        characterViewModel.onCreate()
+        characterViewModel.getAllCharacters()
 
         characterViewModel.responseModel.observe(this, Observer {
             val recyclerView = binding.recyclerCharacters
