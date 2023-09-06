@@ -1,63 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:padding="10dp"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    app:cardCornerRadius="16dp"
+    android:layout_margin="16dp"
+    android:id="@+id/Cardv"
+    android:clickable="true"
+    android:focusable="true">
 
-    <ImageView
-        android:id="@+id/ivCharacter"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:background="@color/black"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="2">
 
-    <TextView
-        android:id="@+id/tvName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        tools:text = "Name"
-        app:layout_constraintStart_toEndOf="@+id/ivCharacter"
-        app:layout_constraintTop_toTopOf="parent"/>
+        <ImageView
+            android:id="@+id/ivCharacter"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:background="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_gravity="center_vertical"/>
 
-    <TextView
-        android:id="@+id/tvSpices"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        tools:text = "Spices"
-        app:layout_constraintStart_toEndOf="@+id/ivCharacter"
-        app:layout_constraintTop_toBottomOf="@+id/tvName"/>
+        <GridLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:columnCount="1">
 
-    <TextView
-        android:id="@+id/tvStatus"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        tools:text = "Status"
-        app:layout_constraintStart_toEndOf="@+id/ivCharacter"
-        app:layout_constraintTop_toBottomOf="@+id/tvSpices"/>
+            <TextView
+                android:id="@+id/tvName"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text = "Name"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
 
-    <TextView
-        android:id="@+id/tvOrigin"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        tools:text = "Origin"
-        app:layout_constraintStart_toEndOf="@+id/ivCharacter"
-        app:layout_constraintTop_toBottomOf="@+id/tvStatus"/>
+            <TextView
+                android:id="@+id/tvSpices"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text = "Spices"/>
 
-    <TextView
-        android:id="@+id/tvLocation"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="5dp"
-        tools:text = "Location"
-        app:layout_constraintStart_toEndOf="@+id/ivCharacter"
-        app:layout_constraintTop_toBottomOf="@+id/tvOrigin"/>
+            <TextView
+                android:id="@+id/tvStatus"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text = "Status"/>
 
+            <TextView
+                android:id="@+id/tvOrigin"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text = "Origin"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="212dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                tools:text="Location" />
+
+        </GridLayout>
+
+    </GridLayout>
+
+</androidx.cardview.widget.CardView>

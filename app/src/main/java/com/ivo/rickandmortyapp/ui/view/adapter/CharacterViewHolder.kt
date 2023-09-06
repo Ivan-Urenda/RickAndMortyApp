@@ -1,5 +1,6 @@
 package com.ivo.rickandmortyapp.ui.view.adapter
 
+import android.text.Html
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
@@ -13,10 +14,10 @@ class CharacterViewHolder(view: View):RecyclerView.ViewHolder(view) {
 
     fun render(character: ResultsModel){
         binding.tvName.text = character.name
-        binding.tvSpices.text = character.species
-        binding.tvStatus.text = character.status
-        binding.tvOrigin.text = character.origin.name
-        binding.tvLocation.text = character.location.name
+        binding.tvSpices.text = Html.fromHtml("Spices: <b>${character.species}</b>")
+        binding.tvStatus.text = Html.fromHtml("Status: <b>${character.status}</b>")
+        binding.tvOrigin.text = Html.fromHtml("Origin: <b>${character.origin.name}</b>")
+        binding.tvLocation.text = Html.fromHtml("Location: <b>${character.location.name}</b>")
         Glide.with(binding.ivCharacter.context).load(character.image).into(binding.ivCharacter)
 
         itemView.setOnClickListener {
