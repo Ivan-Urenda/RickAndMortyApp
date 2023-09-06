@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">RickAndMortyApp</string>
+    <string name="toolbar_main">Characters List</string>
+
 </resources>
