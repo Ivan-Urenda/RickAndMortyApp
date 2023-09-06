@@ -3,6 +3,7 @@ package com.ivo.rickandmortyapp.ui.view.characterDetails
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Html
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.activity.viewModels
@@ -33,10 +34,16 @@ class CharacterDetailsActivity : AppCompatActivity() {
         supportActionBar!!.setDisplayHomeAsUpEnabled(true)
 
         characterViewModel.getCharacter("character/"+idCharacter.toString())
-        characterViewModel.resultsModel.observe(this, Observer {
-            Toast.makeText(this, it.name, Toast.LENGTH_SHORT).show()
+        characterViewModel.resultsModel.observe(this, Observer { character ->
+            Toast.makeText(this, character.name, Toast.LENGTH_SHORT).show()
 
-            Glide.with(this).load(it.image).into(binding.ivCharacterDetail)
+            binding.tvName.text = character.name
+            binding.tvSpecies.text = character.species
+            binding.tvStatus.text = character.status
+            binding.tvOrigin.text = character.origin.name
+            binding.tvLocation.text = character.location.name
+            binding.tvEpisodes.text = character.episode.size.toString()
+            Glide.with(this).load(character.image).into(binding.ivCharacterDetail)
 
         })
     }
