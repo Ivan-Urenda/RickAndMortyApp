@@ -8,11 +8,15 @@ class CharactersRepository {
 
     private val api = CharacterService()
 
-    suspend fun getAllCharacters(): ResponseModel {
+    suspend fun getAllCharacters(): ResponseModel? {
         return api.getAllCharacters()
     }
 
-    suspend fun getCharacter(url: String): ResultsModel {
+    suspend fun getCharacter(url: String): ResultsModel? {
         return api.getCharacter(url)
+    }
+
+    suspend fun getCharactersByPage(url: String): ResponseModel? {
+        return api.getCharactersByPage(url)
     }
 }

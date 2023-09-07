@@ -28,6 +28,7 @@ class CharacterViewHolder(view: View):RecyclerView.ViewHolder(view) {
             val intent: Intent = Intent(binding.ivCharacter.context, CharacterDetailsActivity::class.java)
             intent.putExtra("id", character.id)
             intent.putExtra("name", character.name)
+            intent.putExtra("image", character.image)
             binding.ivCharacter.context.startActivity(intent)
         }
     }

@@ -12,4 +12,7 @@ interface CharacterApiClient {
 
     @GET
     suspend fun getCharacter(@Url url: String):Response<ResultsModel>
+
+    @GET
+    suspend fun getCharactersByPage(@Url url: String):Response<ResponseModel>
 }

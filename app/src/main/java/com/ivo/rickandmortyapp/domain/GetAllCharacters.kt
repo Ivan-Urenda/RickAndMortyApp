@@ -7,5 +7,5 @@ class GetAllCharacters {
 
     private val repository = CharactersRepository()
 
-    suspend fun characters():ResponseModel = repository.getAllCharacters()
+    suspend fun characters():ResponseModel? = repository.getAllCharacters()
 }

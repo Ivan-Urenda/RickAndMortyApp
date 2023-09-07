@@ -15,11 +15,11 @@
         android:layout_height="match_parent"
         android:columnCount="2">
 
-        <ImageView
+        <FrameLayout
             android:id="@+id/ivCharacter"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:background="@color/black"
+            android:background="#C8C8C9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_gravity="center_vertical"/>
@@ -29,43 +29,44 @@
             android:layout_height="match_parent"
             android:columnCount="1">
 
-            <TextView
-                android:id="@+id/tvName"
+            <FrameLayout
+                android:id="@+id/loadName"
                 android:layout_width="212dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                tools:text = "Name"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                android:textAlignment="center"/>
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="#C8C8C9"/>
 
-            <TextView
-                android:id="@+id/tvSpices"
+            <FrameLayout
+                android:id="@+id/loadSpices"
                 android:layout_width="212dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="#C8C8C9"
                 tools:text = "Spices"/>
 
-            <TextView
-                android:id="@+id/tvStatus"
+            <FrameLayout
+                android:id="@+id/loadStatus"
                 android:layout_width="212dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                tools:text = "Status"/>
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="#C8C8C9"
+                tools:text = "Spices"/>
 
-            <TextView
-                android:id="@+id/tvOrigin"
+            <FrameLayout
+                android:id="@+id/loadOrigin"
                 android:layout_width="212dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                tools:text = "Origin"/>
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="#C8C8C9"
+                tools:text = "Spices"/>
 
-            <TextView
-                android:id="@+id/tvLocation"
+            <FrameLayout
+                android:id="@+id/loadLocation"
                 android:layout_width="212dp"
-                android:layout_height="wrap_content"
-                android:padding="5dp"
-                tools:text="Location" />
+                android:layout_height="20dp"
+                android:layout_margin="5dp"
+                android:background="#C8C8C9"
+                tools:text = "Spices" />
 
         </GridLayout>
 
