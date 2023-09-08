@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -35,6 +37,7 @@ android {
         jvmTarget = "1.8"
     }
     buildFeatures {
+        buildConfig = true
         viewBinding = true
     }
 }
@@ -69,5 +72,8 @@ dependencies {
     implementation ("com.google.android.material:material:1.9.0")
     //Shimmer
     implementation("com.facebook.shimmer:shimmer:0.5.0")
+
+    implementation("com.google.dagger:hilt-android:2.44")
+    kapt("com.google.dagger:hilt-android-compiler:2.44")
 
 }

@@ -1,14 +1,18 @@
 package com.ivo.rickandmortyapp.data.network
 
-import com.ivo.rickandmortyapp.core.RetrofitHelper
 import com.ivo.rickandmortyapp.data.models.ResponseModel
 import com.ivo.rickandmortyapp.data.models.ResultsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import retrofit2.Retrofit
+import javax.inject.Inject
 
-class CharacterService {
+class CharacterService
+@Inject
+constructor(
+    private val retrofit: Retrofit
+) {
 
-    private val retrofit = RetrofitHelper.getRetrofit()
 
     suspend fun getAllCharacters(): ResponseModel? {
 
