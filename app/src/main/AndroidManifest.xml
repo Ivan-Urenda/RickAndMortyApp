@@ -19,7 +19,7 @@
             android:name=".ui.view.characterDetails.CharacterDetailsActivity"
             android:exported="false" />
         <activity
-            android:name=".ui.view.charactersList.MainActivity"
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
