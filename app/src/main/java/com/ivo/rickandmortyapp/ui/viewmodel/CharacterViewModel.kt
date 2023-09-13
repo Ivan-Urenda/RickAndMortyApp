@@ -5,12 +5,19 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ivo.rickandmortyapp.data.models.ResponseModel
 import com.ivo.rickandmortyapp.data.models.ResultsModel
-import com.ivo.rickandmortyapp.domain.GetAllCharacters
-import com.ivo.rickandmortyapp.domain.GetCharacter
-import com.ivo.rickandmortyapp.domain.GetCharactersByPage
+import com.ivo.rickandmortyapp.domain.GetAllCharactersUseCase
+import com.ivo.rickandmortyapp.domain.GetCharacterUseCase
+import com.ivo.rickandmortyapp.domain.GetCharactersByPageUseCase
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class CharacterViewModel : ViewModel(){
+@HiltViewModel
+class CharacterViewModel @Inject constructor(
+    private val getAllCharactersUseCase: GetAllCharactersUseCase,
+    private val getCharacterUseCase: GetCharacterUseCase,
+    private val getCharactersByPageUseCase: GetCharactersByPageUseCase
+): ViewModel(){
 
     val responseModel = MutableLiveData<ResponseModel?>()
     val resultsModel = MutableLiveData<ResultsModel?>()
@@ -19,7 +26,7 @@ class CharacterViewModel : ViewModel(){
     fun getAllCharacters() {
 
         viewModelScope.launch {
-            val result = GetAllCharacters().characters()
+            val result = getAllCharactersUseCase()
             responseModel.postValue(result)
         }
     }
@@ -27,7 +34,7 @@ class CharacterViewModel : ViewModel(){
     fun getCharacter(url: String) {
 
         viewModelScope.launch {
-            val result = GetCharacter().character(url)
+            val result = getCharacterUseCase(url)
             resultsModel.postValue(result)
         }
     }
@@ -35,7 +42,7 @@ class CharacterViewModel : ViewModel(){
     fun getCharactersByPage(url: String) {
 
         viewModelScope.launch {
-            val result = GetCharactersByPage().charactersByPage(url)
+            val result = getCharactersByPageUseCase(url)
             responseModelByPage.postValue(result)
         }
     }

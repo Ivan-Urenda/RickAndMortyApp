@@ -5,8 +5,9 @@ import com.ivo.rickandmortyapp.data.models.ResponseModel
 import com.ivo.rickandmortyapp.data.models.ResultsModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+import javax.inject.Inject
 
-class CharacterService {
+class CharacterService @Inject constructor(private val api:CharacterApiClient) {
 
     private val retrofit = RetrofitHelper.getRetrofit()
 
@@ -14,7 +15,7 @@ class CharacterService {
 
         try {
             return withContext(Dispatchers.IO) {
-                val response = retrofit.create(CharacterApiClient::class.java).getAllCharacters()
+                val response = api.getAllCharacters()
                 response.body()
             }
         }catch (e: Exception)
@@ -28,7 +29,7 @@ class CharacterService {
 
         try {
             return withContext(Dispatchers.IO) {
-                val response = retrofit.create(CharacterApiClient::class.java).getCharacter(url)
+                val response = api.getCharacter(url)
                 response.body()!!
             }
         }catch (e: Exception){
@@ -41,7 +42,7 @@ class CharacterService {
 
         try {
             return withContext(Dispatchers.IO) {
-                val response = retrofit.create(CharacterApiClient::class.java).getCharactersByPage(url)
+                val response = api.getCharactersByPage(url)
                 response.body()
             }
         }catch (e: Exception){

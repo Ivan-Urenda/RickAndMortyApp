@@ -14,7 +14,9 @@ import com.ivo.rickandmortyapp.databinding.ActivityMainBinding
 import com.ivo.rickandmortyapp.ui.view.charactersList.adapter.CharacterAdapter
 import com.ivo.rickandmortyapp.ui.viewmodel.CharacterViewModel
 import com.ivo.rickandmortyapp.utils.LoadingDialog
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
