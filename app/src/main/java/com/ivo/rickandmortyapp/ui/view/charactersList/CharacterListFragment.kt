@@ -25,9 +25,6 @@ class CharacterListFragment : Fragment() {
 
     private var _binding: FragmentCharacterListBinding? = null
     private val binding get() = _binding!!
-    private lateinit var recyclerView: RecyclerView
-    private lateinit var llContainer: LinearLayout
-    private lateinit var llLoading: LinearLayout
 
     private var page: Int = 1
 
@@ -36,20 +33,16 @@ class CharacterListFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _binding = FragmentCharacterListBinding.inflate(inflater, container, false)
-
-        llContainer = binding.llContainer
-        llLoading = binding.llLoading
-
-
-        initRecyclerView()
-
-        binding.btnPrevPage.setOnClickListener { prevPage() }
-
-        binding.btnNextPage.setOnClickListener { nextPage() }
-
         return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initRecyclerView()
+        binding.btnPrevPage.setOnClickListener { prevPage() }
+        binding.btnNextPage.setOnClickListener { nextPage() }
     }
 
 
@@ -59,14 +52,14 @@ class CharacterListFragment : Fragment() {
 
             if (it != null)
             {
-                llLoading.isVisible = false
+                /*llLoading.isVisible = false
                 llContainer.isVisible = true
                 recyclerView = binding.recyclerCharacters
                 recyclerView.layoutManager = LinearLayoutManager(activity)
                 recyclerView.adapter = CharacterAdapter(it.results!!) { character ->
                     val nvaDirections = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(character.id, character.name, character.image)
                     findNavController().navigate(nvaDirections)
-                }
+                }*/
             }
             else
             {
@@ -77,20 +70,18 @@ class CharacterListFragment : Fragment() {
     private fun nextPage(){
         if (page<42){
 
-            llLoading.isVisible = true
-            llContainer.isVisible = false
             page++
             characterViewModel.getCharactersByPage("character/?page=${page}")
             characterViewModel.responseModelByPage.observe(viewLifecycleOwner, Observer {
                 if (it != null)
                 {
-                    llLoading.isVisible = false
+                    /*llLoading.isVisible = false
                     llContainer.isVisible = true
                     recyclerView = binding.recyclerCharacters
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = CharacterAdapter(it.results!!)  {
                         Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                 }
                 else
                 {
@@ -103,21 +94,21 @@ class CharacterListFragment : Fragment() {
     private fun prevPage(){
         if (page>1){
 
-            llLoading.isVisible = true
-            llContainer.isVisible = false
+            /*llLoading.isVisible = true
+            llContainer.isVisible = false*/
             page--
             characterViewModel.getCharactersByPage("character/?page=${page}")
             characterViewModel.responseModelByPage.observe(viewLifecycleOwner, Observer {
 
                 if (it != null)
                 {
-                    llLoading.isVisible = false
+                    /*llLoading.isVisible = false
                     llContainer.isVisible = true
                     recyclerView = binding.recyclerCharacters
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = CharacterAdapter(it.results!!) {
                         Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()
-                    }
+                    }*/
                 }
                 else
                 {
