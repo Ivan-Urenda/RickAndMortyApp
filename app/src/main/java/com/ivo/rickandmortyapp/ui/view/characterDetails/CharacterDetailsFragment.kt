@@ -1,6 +1,5 @@
 package com.ivo.rickandmortyapp.ui.view.characterDetails
 
-import android.app.Activity
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,10 +11,8 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import com.bumptech.glide.Glide
-import com.ivo.rickandmortyapp.R
 import com.ivo.rickandmortyapp.databinding.FragmentCharacterDetailsBinding
 import com.ivo.rickandmortyapp.ui.viewmodel.CharacterViewModel
-import com.ivo.rickandmortyapp.utils.LoadingDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -50,15 +47,15 @@ class CharacterDetailsFragment : Fragment() {
         binding.toolbar.title = name
 
         characterViewModel.getCharacter("character/"+id.toString())
-        characterViewModel.resultsModel.observe(viewLifecycleOwner, Observer { character ->
+        characterViewModel.characterResponse.observe(viewLifecycleOwner, Observer { character ->
 
             if (character != null){
                 binding.tvName.text = character.name
                 binding.tvSpecies.text = character.species
                 binding.tvStatus.text = character.status
-                binding.tvOrigin.text = character.origin.name
-                binding.tvLocation.text = character.location.name
-                binding.tvEpisodes.text = character.episode.size.toString()
+                binding.tvOrigin.text = character.origin?.name
+                binding.tvLocation.text = character.location?.name
+                binding.tvEpisodes.text = character.episode?.size.toString()
                 progressBar.visibility = View.GONE
 
             }

@@ -1,14 +1,17 @@
 package com.ivo.rickandmortyapp.ui.viewmodel
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ivo.rickandmortyapp.data.models.ResponseModel
-import com.ivo.rickandmortyapp.data.models.ResultsModel
+import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
+import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.domain.GetAllCharactersUseCase
 import com.ivo.rickandmortyapp.domain.GetCharacterUseCase
 import com.ivo.rickandmortyapp.domain.GetCharactersByPageUseCase
+import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,15 +22,23 @@ class CharacterViewModel @Inject constructor(
     private val getCharactersByPageUseCase: GetCharactersByPageUseCase
 ): ViewModel(){
 
-    val responseModel = MutableLiveData<ResponseModel?>()
-    val resultsModel = MutableLiveData<ResultsModel?>()
-    val responseModelByPage = MutableLiveData<ResponseModel?>()
+    val mainCharactersResponse = MutableLiveData<MainCharactersResponse?>()
+
+    private val _characters = MutableLiveData<List<CharacterModel>>()
+    val characters: LiveData<List<CharacterModel>> get() = _characters
+
+    val characterResponse = MutableLiveData<CharacterResponse?>()
+    val mainCharactersResponseByPage = MutableLiveData<MainCharactersResponse?>()
 
     fun getAllCharacters() {
-
         viewModelScope.launch {
-            val result = getAllCharactersUseCase()
-            responseModel.postValue(result)
+            getAllCharactersUseCase()
+                .catch {
+                    it.printStackTrace()
+                }
+                .collect {
+                    _characters.value = it
+                }
         }
     }
 
@@ -35,7 +46,7 @@ class CharacterViewModel @Inject constructor(
 
         viewModelScope.launch {
             val result = getCharacterUseCase(url)
-            resultsModel.postValue(result)
+            characterResponse.postValue(result)
         }
     }
 
@@ -43,7 +54,7 @@ class CharacterViewModel @Inject constructor(
 
         viewModelScope.launch {
             val result = getCharactersByPageUseCase(url)
-            responseModelByPage.postValue(result)
+            mainCharactersResponseByPage.postValue(result)
         }
     }
 }

@@ -1,41 +1,49 @@
 package com.ivo.rickandmortyapp.data.network
 
-import com.ivo.rickandmortyapp.data.models.ResponseModel
-import com.ivo.rickandmortyapp.data.models.ResultsModel
+import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
+import com.ivo.rickandmortyapp.data.models.CharacterResponse
+import com.ivo.rickandmortyapp.domain.characters.mapper.CharactersResponseToModelDomainMapper
+import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
-class CharacterService @Inject constructor(private val api:CharacterApiClient) {
+class CharacterService
+@Inject
+constructor(
+    private val api:CharacterApiClient,
+    private val mapper: CharactersResponseToModelDomainMapper
+) {
 
-    suspend fun getAllCharacters(): ResponseModel? {
-
+    suspend fun getAllCharacters(): Flow<List<CharacterModel>> = flow {
         try {
-            return withContext(Dispatchers.IO) {
-                val response = api.getAllCharacters()
-                response.body()
-            }
-        }catch (e: Exception)
-        {
-            return null
+            val charactersFromResponse = api.getAllCharacters()
+            val characters = mapper.map(input = charactersFromResponse)
+            emit(characters)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            emit(emptyList())
         }
-
     }
 
-    suspend fun getCharacter(url: String): ResultsModel? {
+    suspend fun getCharacter(url: String): CharacterResponse? {
 
-        try {
+        /*try {
             return withContext(Dispatchers.IO) {
                 val response = api.getCharacter(url)
                 response.body()!!
             }
         }catch (e: Exception){
             return null
-        }
+        }*/
+
+        return null
 
     }
 
-    suspend fun getCharactersByPage(url: String): ResponseModel? {
+    suspend fun getCharactersByPage(url: String): MainCharactersResponse? {
 
         try {
             return withContext(Dispatchers.IO) {

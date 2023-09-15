@@ -1,7 +1,7 @@
 package com.ivo.rickandmortyapp.domain
 
 import com.ivo.rickandmortyapp.data.CharactersRepository
-import com.ivo.rickandmortyapp.data.models.ResultsModel
+import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import javax.inject.Inject
 
 class GetCharacterUseCase @Inject constructor(
@@ -9,5 +9,5 @@ class GetCharacterUseCase @Inject constructor(
 ){
 
 
-    suspend operator fun invoke(url: String): ResultsModel? = repository.getCharacter(url)
+    suspend operator fun invoke(url: String): CharacterResponse? = repository.getCharacter(url)
 }
