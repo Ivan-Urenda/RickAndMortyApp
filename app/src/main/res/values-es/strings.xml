@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">RickAndMortyApp</string>
     <string name="toolbar_main">Rick And Morty App</string>
@@ -16,14 +17,14 @@
     </string>
 
     <!--Characters List-->
-    <string name="prevPage">Prev Page</string>
-    <string name="nextPage">Next Page</string>
+    <string name="prevPage">Página anterior</string>
+    <string name="nextPage">Siguiente Página</string>
 
     <!--Character Details-->
-    <string name="name">Name: </string>
-    <string name="species">Species: <b>%1$s</b></string>
-    <string name="status">Status: <b>%1$s</b></string>
-    <string name="origin">Origin: <b>%1$s</b></string>
-    <string name="location">Location: <b>%1$s</b></string>
-    <string name="episodes">Episodes: </string>
+    <string name="name">Nombre: </string>
+    <string name="species">Especie: %1$s</string>
+    <string name="status">Estatus: %1$s</string>
+    <string name="origin">Origen: %1$s</string>
+    <string name="location">Ubicación: %1$s</string>
+    <string name="episodes">Episodios: </string>
 </resources>
