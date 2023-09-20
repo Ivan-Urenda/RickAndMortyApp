@@ -4,6 +4,7 @@ import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
 import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.data.network.CharacterService
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
+import com.ivo.rickandmortyapp.utils.DataState
 import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
 
@@ -11,7 +12,7 @@ class CharactersRepository @Inject constructor(
     private val api: CharacterService
 ){
 
-    suspend fun getAllCharacters(): Flow<List<CharacterModel>> {
+    suspend fun getAllCharacters(): Flow<DataState<List<CharacterModel>>> {
         return api.getAllCharacters()
     }
 

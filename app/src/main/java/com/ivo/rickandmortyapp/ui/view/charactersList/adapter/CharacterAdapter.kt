@@ -8,10 +8,11 @@ import com.bumptech.glide.Glide
 import com.ivo.rickandmortyapp.R
 import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.databinding.ItemCharacterBinding
+import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 
 class CharacterAdapter(
-    private val characterList: List<CharacterResponse>,
-    private val onCharacterClick: (CharacterResponse) -> Unit
+    private val characterList: List<CharacterModel>,
+    private val onCharacterClick: (CharacterModel) -> Unit
 ) : RecyclerView.Adapter<CharacterAdapter.CharacterViewHolder>() {
 
     private var mContext: Context? = null
@@ -34,12 +35,12 @@ class CharacterAdapter(
 
     inner class CharacterViewHolder(val binding: ItemCharacterBinding):RecyclerView.ViewHolder(binding.root) {
 
-        fun render(character: CharacterResponse, ctxt: Context, onClick: (CharacterResponse) -> Unit) = with(binding) {
+        fun render(character: CharacterModel, ctxt: Context, onClick: (CharacterModel) -> Unit) = with(binding) {
             tvName.text = character.name
-            tvSpices.text = ctxt.getString(R.string.species, character.species)
+            tvSpices.text = ctxt.getString(R.string.species, character.specie)
             tvStatus.text = ctxt.getString(R.string.status, character.status)
-            tvOrigin.text = ctxt.getString(R.string.origin, character.origin?.name)
-            tvLocation.text = ctxt.getString(R.string.location, character.location?.name)
+            tvOrigin.text = ctxt.getString(R.string.origin, character.origin)
+            tvLocation.text = ctxt.getString(R.string.location, character.location)
             Glide.with(ivCharacter.context).load(character.image).into(binding.ivCharacter)
             root.setOnClickListener { onClick(character) }
         }

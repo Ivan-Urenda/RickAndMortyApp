@@ -7,9 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.ivo.rickandmortyapp.databinding.FragmentCharacterListBinding
+import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
+import com.ivo.rickandmortyapp.ui.view.charactersList.adapter.CharacterAdapter
 import com.ivo.rickandmortyapp.ui.viewmodel.CharacterViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -33,41 +36,56 @@ class CharacterListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        characterViewModel.getAllCharacters()
         subscribeObservers()
-        initRecyclerView()
-        binding.btnPrevPage.setOnClickListener { prevPage() }
-        binding.btnNextPage.setOnClickListener { nextPage() }
     }
 
     private fun subscribeObservers() {
-        characterViewModel.characters.observe(viewLifecycleOwner) {
-            Log.d("Characters", it.toString())
+        characterViewModel.characters.observe(viewLifecycleOwner) { setCharacters(it) }
+        characterViewModel.isError.observe(viewLifecycleOwner) { binding.textViewError.visibility = View.VISIBLE}
+        characterViewModel.loading.observe(viewLifecycleOwner) { progressShimmer(it) }
+    }
+
+    private fun progressShimmer(isLoading: Boolean) = with(binding.shimmerCharactersLoading) {
+        this.isVisible = isLoading
+        if (isLoading) {
+            this.startShimmer()
+        } else {
+            this.stopShimmer()
         }
     }
 
+    private fun setCharacters(characters: List<CharacterModel>) {
+        binding.characterSuccessViewGroup.isVisible = true
+        binding.recyclerCharacters.apply {
+            adapter = CharacterAdapter(characterList = characters) {
 
-    private fun initRecyclerView(){
+            }
+        }
+    }
+
+    /*private fun initRecyclerView(){
         characterViewModel.getAllCharacters()
         characterViewModel.mainCharactersResponse.observe(viewLifecycleOwner, Observer {
 
             if (it != null)
             {
-                /*llLoading.isVisible = false
+                *//*llLoading.isVisible = false
                 llContainer.isVisible = true
                 recyclerView = binding.recyclerCharacters
                 recyclerView.layoutManager = LinearLayoutManager(activity)
                 recyclerView.adapter = CharacterAdapter(it.results!!) { character ->
                     val nvaDirections = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(character.id, character.name, character.image)
                     findNavController().navigate(nvaDirections)
-                }*/
+                }*//*
             }
             else
             {
                 Toast.makeText(activity, "Error, try again later", Toast.LENGTH_SHORT).show()
             }
         })
-    }
-    private fun nextPage(){
+    }*/
+    /*private fun nextPage(){
         if (page<42){
 
             page++
@@ -75,13 +93,13 @@ class CharacterListFragment : Fragment() {
             characterViewModel.mainCharactersResponseByPage.observe(viewLifecycleOwner, Observer {
                 if (it != null)
                 {
-                    /*llLoading.isVisible = false
+                    *//*llLoading.isVisible = false
                     llContainer.isVisible = true
                     recyclerView = binding.recyclerCharacters
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = CharacterAdapter(it.results!!)  {
                         Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()
-                    }*/
+                    }*//*
                 }
                 else
                 {
@@ -94,21 +112,21 @@ class CharacterListFragment : Fragment() {
     private fun prevPage(){
         if (page>1){
 
-            /*llLoading.isVisible = true
-            llContainer.isVisible = false*/
+            *//*llLoading.isVisible = true
+            llContainer.isVisible = false*//*
             page--
             characterViewModel.getCharactersByPage("character/?page=${page}")
             characterViewModel.mainCharactersResponseByPage.observe(viewLifecycleOwner, Observer {
 
                 if (it != null)
                 {
-                    /*llLoading.isVisible = false
+                    *//*llLoading.isVisible = false
                     llContainer.isVisible = true
                     recyclerView = binding.recyclerCharacters
                     recyclerView.layoutManager = LinearLayoutManager(activity)
                     recyclerView.adapter = CharacterAdapter(it.results!!) {
                         Toast.makeText(requireContext(), it.name, Toast.LENGTH_LONG).show()
-                    }*/
+                    }*//*
                 }
                 else
                 {
@@ -116,5 +134,5 @@ class CharacterListFragment : Fragment() {
                 }
             })
         }
-    }
+    }*/
 }

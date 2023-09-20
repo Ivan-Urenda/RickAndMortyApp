@@ -10,12 +10,12 @@ class CharactersResponseToModelDomainMapper
 constructor(): BaseMapper<MainCharactersResponse, List<CharacterModel>> {
 
     override fun map(input: MainCharactersResponse): List<CharacterModel> {
-
         return input.characters?.let { charactersResponses ->
             charactersResponses.map { singleCharacter ->
                 with(singleCharacter) {
                     CharacterModel(
                         name = name.orEmpty(),
+                        image = image.orEmpty(),
                         specie = species.orEmpty(),
                         status = status.orEmpty(),
                         origin = origin?.name.orEmpty(),

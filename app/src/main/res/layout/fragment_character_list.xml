@@ -52,11 +52,26 @@
         android:id="@+id/recyclerCharacters"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/guidelineButtonsToRecycler"
         tools:listitem="@layout/loading_characters" />
+
+    <TextView
+        android:id="@+id/textViewError"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:textAlignment="center"
+        android:visibility="gone"
+        android:gravity="center"
+        style="@style/MaterialAlertDialog.Material3.Title.Text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/guidelineButtonsToRecycler"
+        android:text="ERROR"/>
 
     <androidx.constraintlayout.widget.Group
         android:id="@+id/characterSuccessViewGroup"
@@ -74,8 +89,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbarMain"
-        app:shimmer_auto_start="true">
+        app:layout_constraintTop_toBottomOf="@id/toolbarMain">
 
         <LinearLayout
             android:layout_width="match_parent"

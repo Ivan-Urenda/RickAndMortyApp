@@ -4,6 +4,7 @@ import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
 import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.domain.characters.mapper.CharactersResponseToModelDomainMapper
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
+import com.ivo.rickandmortyapp.utils.DataState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -17,14 +18,15 @@ constructor(
     private val mapper: CharactersResponseToModelDomainMapper
 ) {
 
-    suspend fun getAllCharacters(): Flow<List<CharacterModel>> = flow {
+    suspend fun getAllCharacters(): Flow<DataState<List<CharacterModel>>> = flow {
+        emit(DataState.Loading)
         try {
             val charactersFromResponse = api.getAllCharacters()
             val characters = mapper.map(input = charactersFromResponse)
-            emit(characters)
+            emit(DataState.Success(characters))
         } catch (e: Exception) {
             e.printStackTrace()
-            emit(emptyList())
+            emit(DataState.Error(e))
         }
     }
 
