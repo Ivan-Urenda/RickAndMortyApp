@@ -20,11 +20,8 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase,
-    private val getCharacterUseCase: GetCharacterUseCase,
-    private val getCharactersByPageUseCase: GetCharactersByPageUseCase
 ): ViewModel(){
 
-    val mainCharactersResponse = MutableLiveData<MainCharactersResponse?>()
 
     private val _characters = MutableLiveData<List<CharacterModel>>()
     val characters: LiveData<List<CharacterModel>> get() = _characters
@@ -34,10 +31,6 @@ class CharacterViewModel @Inject constructor(
 
     private val _isError = MutableLiveData<Boolean>()
     val isError: LiveData<Boolean> get() = _isError
-
-
-    val characterResponse = MutableLiveData<CharacterResponse?>()
-    val mainCharactersResponseByPage = MutableLiveData<MainCharactersResponse?>()
 
     @SuppressLint("NullSafeMutableLiveData")
     fun getAllCharacters() {
@@ -64,20 +57,8 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
-    fun getCharacter(url: String) {
+    fun getCharacterBy(id: Int) {
 
-        viewModelScope.launch {
-            val result = getCharacterUseCase(url)
-            characterResponse.postValue(result)
-        }
-    }
-
-    fun getCharactersByPage(url: String) {
-
-        viewModelScope.launch {
-            val result = getCharactersByPageUseCase(url)
-            mainCharactersResponseByPage.postValue(result)
-        }
     }
 
 }
