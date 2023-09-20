@@ -10,6 +10,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import com.ivo.rickandmortyapp.databinding.FragmentCharacterListBinding
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import com.ivo.rickandmortyapp.ui.view.charactersList.adapter.CharacterAdapter
@@ -59,9 +60,15 @@ class CharacterListFragment : Fragment() {
         binding.characterSuccessViewGroup.isVisible = true
         binding.recyclerCharacters.apply {
             adapter = CharacterAdapter(characterList = characters) {
-
+                val action = CharacterListFragmentDirections.actionCharacterListFragmentToCharacterDetailsFragment(it.id)
+                findNavController().navigate(action)
             }
         }
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     /*private fun initRecyclerView(){

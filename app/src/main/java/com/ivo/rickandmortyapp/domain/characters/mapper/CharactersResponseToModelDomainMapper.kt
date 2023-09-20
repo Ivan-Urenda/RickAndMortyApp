@@ -5,6 +5,7 @@ import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import com.ivo.rickandmortyapp.utils.BaseMapper
 import javax.inject.Inject
 
+private const val CHARACTER_ID_DEFAULT = 1
 class CharactersResponseToModelDomainMapper
 @Inject
 constructor(): BaseMapper<MainCharactersResponse, List<CharacterModel>> {
@@ -14,6 +15,7 @@ constructor(): BaseMapper<MainCharactersResponse, List<CharacterModel>> {
             charactersResponses.map { singleCharacter ->
                 with(singleCharacter) {
                     CharacterModel(
+                        id = id ?: CHARACTER_ID_DEFAULT,
                         name = name.orEmpty(),
                         image = image.orEmpty(),
                         specie = species.orEmpty(),
