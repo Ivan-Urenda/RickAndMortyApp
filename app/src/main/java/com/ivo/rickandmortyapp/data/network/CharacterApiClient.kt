@@ -17,6 +17,8 @@ interface CharacterApiClient {
         @Path("id") id: Int
     ): CharacterResponse
 
-    @GET
-    suspend fun getCharactersByPage(@Url page: String):Response<MainCharactersResponse>
+    @GET("character/")
+    suspend fun getCharactersByPage(
+        @Query("page") page: Int
+    ):MainCharactersResponse
 }

@@ -20,10 +20,10 @@
     <string name="nextPage">Next Page</string>
 
     <!--Character Details-->
-    <string name="name">Name: </string>
+    <string name="name">Name: <b>%1$s</b></string>
     <string name="species">Species: <b>%1$s</b></string>
     <string name="status">Status: <b>%1$s</b></string>
     <string name="origin">Origin: <b>%1$s</b></string>
     <string name="location">Location: <b>%1$s</b></string>
-    <string name="episodes">Episodes: </string>
+    <string name="episodes">Episodes: <b>%1$s</b></string>
 </resources>

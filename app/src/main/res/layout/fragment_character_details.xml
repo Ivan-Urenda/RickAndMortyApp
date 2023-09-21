@@ -31,7 +31,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin"
-                app:title="Detail"
+                app:title="Character Details"
                 android:theme="@style/Theme.RickAndMortyApp"/>
 
         </com.google.android.material.appbar.CollapsingToolbarLayout>
@@ -52,10 +52,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:columnCount="2"
+                android:columnCount="1"
                 android:layout_gravity="center">
 
                 <TextView
+                    android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -64,17 +65,9 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
-                <TextView
-                    android:id="@+id/tvName"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
 
                 <TextView
+                    android:id="@+id/tvSpecies"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -83,17 +76,9 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
-                <TextView
-                    android:id="@+id/tvSpecies"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
 
                 <TextView
+                    android:id="@+id/tvStatus"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -102,17 +87,9 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
-                <TextView
-                    android:id="@+id/tvStatus"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
 
                 <TextView
+                    android:id="@+id/tvOrigin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -121,17 +98,9 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
-                <TextView
-                    android:id="@+id/tvOrigin"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
 
                 <TextView
+                    android:id="@+id/tvLocation"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -140,17 +109,9 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
-                <TextView
-                    android:id="@+id/tvLocation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
 
                 <TextView
+                    android:id="@+id/tvEpisodes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
@@ -159,15 +120,16 @@
                     android:textSize="16sp"
                     android:fontFamily="sans-serif-medium"
                     android:layout_gravity="start"/>
+
                 <TextView
-                    android:id="@+id/tvEpisodes"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/textViewError"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
-                    android:textColor="@color/gray"
-                    android:textSize="16sp"
-                    android:fontFamily="sans-serif-medium"
-                    android:layout_gravity="end"/>
+                    android:textAlignment="center"
+                    android:visibility="gone"
+                    android:layout_gravity="center_horizontal"
+                    style="@style/MaterialAlertDialog.Material3.Title.Text"
+                    android:text="ERROR"/>
 
             </GridLayout>
 

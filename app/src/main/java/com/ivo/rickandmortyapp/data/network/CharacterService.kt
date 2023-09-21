@@ -30,31 +30,31 @@ constructor(
         }
     }
 
-    suspend fun getCharacter(url: String): CharacterResponse? {
+    suspend fun getCharacterDetail(id: Int): Flow<DataState<CharacterResponse>> = flow {
 
-        /*try {
-            return withContext(Dispatchers.IO) {
-                val response = api.getCharacter(url)
-                response.body()!!
-            }
-        }catch (e: Exception){
-            return null
-        }*/
+        emit(DataState.Loading)
+        try {
+            val characterDetailFromResponse = api.getCharacterDetail(id)
+            emit(DataState.Success(characterDetailFromResponse))
 
-        return null
+        }catch (e: Exception) {
+            e.printStackTrace()
+            emit(DataState.Error(e))
+        }
 
     }
 
-    suspend fun getCharactersByPage(url: String): MainCharactersResponse? {
+    suspend fun getCharactersByPage(page: Int): Flow<DataState<List<CharacterModel>>> = flow  {
 
+        emit(DataState.Loading)
         try {
-            return withContext(Dispatchers.IO) {
-                val response = api.getCharactersByPage(url)
-                response.body()
-            }
+            val charactersFromResponse = api.getCharactersByPage(page)
+            val characters = mapper.map(input = charactersFromResponse)
+            emit(DataState.Success(characters))
         }catch (e: Exception){
 
-            return null
+            e.printStackTrace()
+            emit(DataState.Error(e))
         }
 
     }

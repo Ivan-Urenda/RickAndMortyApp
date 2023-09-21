@@ -21,10 +21,10 @@
     <string name="nextPage">Siguiente Página</string>
 
     <!--Character Details-->
-    <string name="name">Nombre: </string>
-    <string name="species">Especie: %1$s</string>
-    <string name="status">Estatus: %1$s</string>
-    <string name="origin">Origen: %1$s</string>
-    <string name="location">Ubicación: %1$s</string>
-    <string name="episodes">Episodios: </string>
+    <string name="name">Nombre: <b>%1$s</b></string>
+    <string name="species">Especie: <b>%1$s</b></string>
+    <string name="status">Estatus: <b>%1$s</b></string>
+    <string name="origin">Origen: <b>%1$s</b></string>
+    <string name="location">Ubicación: <b>%1$s</b></string>
+    <string name="episodes">Episodios: <b>%1$s</b></string>
 </resources>

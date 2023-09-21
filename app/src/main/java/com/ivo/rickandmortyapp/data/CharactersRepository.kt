@@ -16,11 +16,11 @@ class CharactersRepository @Inject constructor(
         return api.getAllCharacters()
     }
 
-    suspend fun getCharacter(url: String): CharacterResponse? {
-        return api.getCharacter(url)
+    suspend fun getCharacter(id: Int): Flow<DataState<CharacterResponse>> {
+        return api.getCharacterDetail(id)
     }
 
-    suspend fun getCharactersByPage(url: String): MainCharactersResponse? {
-        return api.getCharactersByPage(url)
+    suspend fun getCharactersByPage(page: Int): Flow<DataState<List<CharacterModel>>> {
+        return api.getCharactersByPage(page)
     }
 }

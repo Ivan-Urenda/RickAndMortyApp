@@ -20,11 +20,19 @@ import javax.inject.Inject
 @HiltViewModel
 class CharacterViewModel @Inject constructor(
     private val getAllCharactersUseCase: GetAllCharactersUseCase,
+    private val getCharacterUseCase: GetCharacterUseCase,
+    private val getCharactersByPageUseCase: GetCharactersByPageUseCase
 ): ViewModel(){
 
 
     private val _characters = MutableLiveData<List<CharacterModel>>()
     val characters: LiveData<List<CharacterModel>> get() = _characters
+
+    private val _characterDetail = MutableLiveData<CharacterResponse>()
+    val characterDetail: LiveData<CharacterResponse> get() = _characterDetail
+
+    private val _charactersByPage = MutableLiveData<List<CharacterModel>>()
+    val charactersByPage: LiveData<List<CharacterModel>> get() = _charactersByPage
 
     private val _loading = MutableLiveData<Boolean>()
     val loading: LiveData<Boolean> get() = _loading
@@ -57,8 +65,56 @@ class CharacterViewModel @Inject constructor(
         }
     }
 
-    fun getCharacterBy(id: Int) {
+    @SuppressLint("NullSafeMutableLiveData")
+    fun getCharacterDetail(id: Int) {
 
+        viewModelScope.launch {
+            getCharacterUseCase(id)
+                .catch {
+                    it.printStackTrace()
+                    _isError.value = false
+                }
+                .collect { dataState ->
+                when (dataState) {
+                    DataState.Loading -> _loading.value = true
+                    is DataState.Error -> {
+                        _loading.value = false
+                        _isError.value = true
+                    }
+
+                    is DataState.Success -> {
+                        _loading.value = false
+                        _characterDetail.value = dataState.data
+                    }
+                }
+
+                }
+        }
+    }
+
+    @SuppressLint("NullSafeMutableLiveData")
+    fun getCharactersByPage(page: Int) {
+        viewModelScope.launch {
+            getCharactersByPageUseCase(page)
+                .catch {
+                    it.printStackTrace()
+                    _isError.value = false
+                }
+                .collect { dataState ->
+                    when (dataState) {
+                        DataState.Loading -> _loading.value = true
+                        is DataState.Error -> {
+                            _loading.value = false
+                            _isError.value = true
+                        }
+
+                        is DataState.Success -> {
+                            _loading.value = false
+                            _charactersByPage.value = dataState.data
+                        }
+                    }
+                }
+        }
     }
 
 }
