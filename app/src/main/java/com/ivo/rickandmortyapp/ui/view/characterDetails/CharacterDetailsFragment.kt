@@ -18,6 +18,7 @@ import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import com.ivo.rickandmortyapp.ui.view.charactersList.CharacterListFragmentDirections
 import com.ivo.rickandmortyapp.ui.view.charactersList.adapter.CharacterAdapter
 import com.ivo.rickandmortyapp.ui.viewmodel.CharacterViewModel
+import com.ivo.rickandmortyapp.utils.loadImageFromUrl
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -45,19 +46,22 @@ class CharacterDetailsFragment : Fragment() {
 
     private fun subscribeObservers() {
         characterViewModel.characterDetail.observe(viewLifecycleOwner) { setCharacter(it) }
-        characterViewModel.isError.observe(viewLifecycleOwner) { binding.textViewError.visibility = View.VISIBLE}
+        characterViewModel.isError.observe(viewLifecycleOwner) {
+            binding.textViewError.visibility = View.VISIBLE
+        }
         characterViewModel.loading.observe(viewLifecycleOwner) { progressBar(it) }
     }
 
     private fun setCharacter(character: CharacterModel) {
-        Glide.with(this).load(character.image).into(binding.ivCharacterDetail)
-
-        binding.tvName.text = getString(R.string.name, character.name)
-        binding.tvSpecies.text = getString(R.string.species, character.specie)
-        binding.tvStatus.text = getString(R.string.status, character.status)
-        binding.tvOrigin.text = getString(R.string.origin, character.origin)
-        binding.tvLocation.text = getString(R.string.location, character.location)
-        binding.tvEpisodes.text = getString(R.string.episodes, character.episodes)
+        binding.run {
+            ivCharacterDetail.loadImageFromUrl(character.image)
+            tvName.text = getString(R.string.name, character.name)
+            tvSpecies.text = getString(R.string.species, character.specie)
+            tvStatus.text = getString(R.string.status, character.status)
+            tvOrigin.text = getString(R.string.origin, character.origin)
+            tvLocation.text = getString(R.string.location, character.location)
+            tvEpisodes.text = getString(R.string.episodes, character.episodes)
+        }
     }
 
     private fun progressBar(isLoading: Boolean) = with(binding.progressBar) {

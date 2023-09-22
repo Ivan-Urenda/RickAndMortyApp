@@ -9,6 +9,7 @@ import com.ivo.rickandmortyapp.R
 import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.databinding.ItemCharacterBinding
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
+import com.ivo.rickandmortyapp.utils.loadImageFromUrl
 
 class CharacterAdapter(
     private val characterList: List<CharacterModel>,
@@ -41,7 +42,7 @@ class CharacterAdapter(
             tvStatus.text = ctxt.getString(R.string.status, character.status)
             tvOrigin.text = ctxt.getString(R.string.origin, character.origin)
             tvLocation.text = ctxt.getString(R.string.location, character.location)
-            Glide.with(ivCharacter.context).load(character.image).into(binding.ivCharacter)
+            ivCharacter.loadImageFromUrl(character.image)
             root.setOnClickListener { onClick(character) }
         }
     }
