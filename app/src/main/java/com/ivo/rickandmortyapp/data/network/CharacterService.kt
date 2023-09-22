@@ -1,21 +1,19 @@
 package com.ivo.rickandmortyapp.data.network
 
-import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
-import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.domain.characters.mapper.CharactersResponseToModelDomainMapper
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
+import com.ivo.rickandmortyapp.domain.detail.SingleCharacterResponseToModelDomainMapper
 import com.ivo.rickandmortyapp.utils.DataState
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class CharacterService
 @Inject
 constructor(
     private val api:CharacterApiClient,
-    private val mapper: CharactersResponseToModelDomainMapper
+    private val mapper: CharactersResponseToModelDomainMapper,
+    private val mapperDetail: SingleCharacterResponseToModelDomainMapper
 ) {
 
     suspend fun getAllCharacters(): Flow<DataState<List<CharacterModel>>> = flow {
@@ -30,12 +28,13 @@ constructor(
         }
     }
 
-    suspend fun getCharacterDetail(id: Int): Flow<DataState<CharacterResponse>> = flow {
+    suspend fun getCharacterDetail(id: Int): Flow<DataState<CharacterModel>> = flow {
 
         emit(DataState.Loading)
         try {
             val characterDetailFromResponse = api.getCharacterDetail(id)
-            emit(DataState.Success(characterDetailFromResponse))
+            val character = mapperDetail.map(input = characterDetailFromResponse)
+            emit(DataState.Success(character))
 
         }catch (e: Exception) {
             e.printStackTrace()

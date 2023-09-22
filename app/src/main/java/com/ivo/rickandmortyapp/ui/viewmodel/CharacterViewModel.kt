@@ -28,8 +28,8 @@ class CharacterViewModel @Inject constructor(
     private val _characters = MutableLiveData<List<CharacterModel>>()
     val characters: LiveData<List<CharacterModel>> get() = _characters
 
-    private val _characterDetail = MutableLiveData<CharacterResponse>()
-    val characterDetail: LiveData<CharacterResponse> get() = _characterDetail
+    private val _characterDetail = MutableLiveData<CharacterModel>()
+    val characterDetail: LiveData<CharacterModel> get() = _characterDetail
 
     private val _charactersByPage = MutableLiveData<List<CharacterModel>>()
     val charactersByPage: LiveData<List<CharacterModel>> get() = _charactersByPage

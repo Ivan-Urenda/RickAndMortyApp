@@ -1,7 +1,5 @@
 package com.ivo.rickandmortyapp.data
 
-import com.ivo.rickandmortyapp.data.models.MainCharactersResponse
-import com.ivo.rickandmortyapp.data.models.CharacterResponse
 import com.ivo.rickandmortyapp.data.network.CharacterService
 import com.ivo.rickandmortyapp.domain.characters.model.CharacterModel
 import com.ivo.rickandmortyapp.utils.DataState
@@ -16,7 +14,7 @@ class CharactersRepository @Inject constructor(
         return api.getAllCharacters()
     }
 
-    suspend fun getCharacter(id: Int): Flow<DataState<CharacterResponse>> {
+    suspend fun getCharacter(id: Int): Flow<DataState<CharacterModel>> {
         return api.getCharacterDetail(id)
     }
 

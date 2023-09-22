@@ -44,20 +44,20 @@ class CharacterDetailsFragment : Fragment() {
     }
 
     private fun subscribeObservers() {
-        characterViewModel.characterDetail.observe(viewLifecycleOwner) { setCharacter(it, requireContext()) }
+        characterViewModel.characterDetail.observe(viewLifecycleOwner) { setCharacter(it) }
         characterViewModel.isError.observe(viewLifecycleOwner) { binding.textViewError.visibility = View.VISIBLE}
         characterViewModel.loading.observe(viewLifecycleOwner) { progressBar(it) }
     }
 
-    private fun setCharacter(character: CharacterResponse, ctxt: Context) {
+    private fun setCharacter(character: CharacterModel) {
         Glide.with(this).load(character.image).into(binding.ivCharacterDetail)
 
-        binding.tvName.text = ctxt.getString(R.string.name, character.name)
-        binding.tvSpecies.text = ctxt.getString(R.string.species, character.species)
-        binding.tvStatus.text = ctxt.getString(R.string.status, character.status)
-        binding.tvOrigin.text = ctxt.getString(R.string.origin, character.origin?.name)
-        binding.tvLocation.text = ctxt.getString(R.string.location, character.location?.name)
-        binding.tvEpisodes.text = ctxt.getString(R.string.episodes, character.episode?.size.toString())
+        binding.tvName.text = getString(R.string.name, character.name)
+        binding.tvSpecies.text = getString(R.string.species, character.specie)
+        binding.tvStatus.text = getString(R.string.status, character.status)
+        binding.tvOrigin.text = getString(R.string.origin, character.origin)
+        binding.tvLocation.text = getString(R.string.location, character.location)
+        binding.tvEpisodes.text = getString(R.string.episodes, character.episodes)
     }
 
     private fun progressBar(isLoading: Boolean) = with(binding.progressBar) {

@@ -26,5 +26,5 @@
     <string name="status">Estatus: <b>%1$s</b></string>
     <string name="origin">Origen: <b>%1$s</b></string>
     <string name="location">Ubicación: <b>%1$s</b></string>
-    <string name="episodes">Episodios: <b>%1$s</b></string>
+    <string name="episodes">Episodios: <b>%1$d</b></string>
 </resources>
